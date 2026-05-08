@@ -154,7 +154,7 @@ export default function NameManager({ names, onNamesChange, disabled }: NameMana
           </span>
           {names.length === 0 && (
             <span className="font-body text-xs" style={{ color: 'rgba(255,170,0,0.8)' }}>
-              Add 1 name to spin
+              Add a name to spin
             </span>
           )}
         </div>
