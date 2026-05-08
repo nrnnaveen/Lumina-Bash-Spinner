@@ -18,6 +18,7 @@ import {
 } from '@/utils/spinnerUtils'
 
 const DEFAULT_NAMES = ['Alice', 'Bob', 'Carol', 'Dave', 'Eve', 'Frank']
+const MAX_PARTICIPANTS = 30
 
 export default function HomePage() {
   const [names, setNames] = useState<string[]>([])
@@ -56,8 +57,8 @@ export default function HomePage() {
 
   const handleSpin = useCallback(() => {
     if (isSpinning) return
-    if (names.length < 2) {
-      toast.error('Add at least 2 names to spin!', {
+    if (names.length === 0) {
+      toast.error('Add at least 1 name to spin!', {
         icon: '⚠️',
       })
       return
@@ -81,9 +82,14 @@ export default function HomePage() {
   const handleSpinComplete = useCallback(() => {
     setIsSpinning(false)
     const wi = (window as unknown as { _pendingWinner: number })._pendingWinner
-    setWinnerIndex(wi)
     const winnerName = names[wi]
+    if (typeof winnerName !== 'string') {
+      setWinnerIndex(null)
+      return
+    }
+    setWinnerIndex(null)
     setWinner(winnerName)
+    setNames((prev) => prev.filter((_, idx) => idx !== wi))
 
     setTimeout(() => {
       playWinnerSound()
@@ -175,11 +181,11 @@ export default function HomePage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.5 }}
-            className="flex flex-col items-center gap-6 flex-1"
+            className="flex flex-col items-center gap-6 flex-1 w-full"
           >
             {/* Wheel container */}
             <div
-              className="relative flex flex-col items-center p-6 rounded-3xl"
+              className="relative flex w-full max-w-[500px] flex-col items-center p-3 sm:p-6 rounded-3xl"
               style={{
                 background: 'rgba(6,13,22,0.6)',
                 border: '1px solid rgba(0,212,255,0.15)',
@@ -224,7 +230,7 @@ export default function HomePage() {
                 whileHover={{ scale: isSpinning ? 1 : 1.04 }}
                 whileTap={{ scale: isSpinning ? 1 : 0.97 }}
                 onClick={handleSpin}
-                disabled={isSpinning || names.length < 2}
+                disabled={isSpinning || names.length === 0}
                 className="btn-spin w-full py-4 text-base"
                 style={{
                   fontSize: '0.9rem',
@@ -257,12 +263,12 @@ export default function HomePage() {
                   border: '1px solid rgba(0,212,255,0.1)',
                 }}
               >
-                <StatusDot active={names.length >= 2} />
+                <StatusDot active={names.length > 0} />
                 <span className="font-mono text-xs" style={{ color: 'rgba(0,212,255,0.7)' }}>
                   {isSpinning
                     ? 'SPINNING...'
-                    : names.length < 2
-                    ? `NEED ${2 - names.length} MORE NAME${2 - names.length > 1 ? 'S' : ''}`
+                    : names.length === 0
+                    ? 'ADD NAMES TO SPIN'
                     : `READY · ${names.length} PARTICIPANTS`}
                 </span>
               </div>
@@ -319,8 +325,8 @@ function StatusDot({ active }: { active: boolean }) {
 function SessionInfo({ names, winner }: { names: string[]; winner: string | null }) {
   const stats = [
     { label: 'Participants', value: names.length.toString(), color: '#00d4ff' },
-    { label: 'Min to Spin', value: '2', color: '#b44fff' },
-    { label: 'Max Names', value: '20', color: '#ff2d78' },
+    { label: 'Min to Spin', value: '1', color: '#b44fff' },
+    { label: 'Max Names', value: MAX_PARTICIPANTS.toString(), color: '#ff2d78' },
     { label: 'Current Winner', value: winner ?? '—', color: '#ffd700' },
   ]
 
