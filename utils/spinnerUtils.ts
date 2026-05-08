@@ -56,7 +56,7 @@ function getRandomInt(max: number): number {
   if (max <= 0) return 0
 
   if (typeof crypto !== 'undefined' && typeof crypto.getRandomValues === 'function') {
-    const range = 0x100000000
+    const range = 2 ** 32
     const limit = Math.floor(range / max) * max
     const array = new Uint32Array(1)
     let value = 0
