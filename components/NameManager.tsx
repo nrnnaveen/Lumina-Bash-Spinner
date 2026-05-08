@@ -272,7 +272,7 @@ export default function NameManager({ names, onNamesChange, disabled }: NameMana
                         disabled={disabled}
                         title="Edit name"
                         className="text-xs px-2 py-1 rounded-md transition-all hover:bg-blue-500/20"
-                        style={{ color: 'rgba(0,212,255,0.6)', disabled: disabled }}
+                        style={{ color: 'rgba(0,212,255,0.6)' }}
                       >
                         ✎
                       </button>
