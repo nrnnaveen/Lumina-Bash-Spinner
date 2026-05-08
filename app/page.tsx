@@ -81,13 +81,12 @@ export default function HomePage() {
 
   const handleSpinComplete = useCallback(() => {
     setIsSpinning(false)
+    setWinnerIndex(null)
     const wi = (window as unknown as { _pendingWinner: number })._pendingWinner
     const winnerName = names[wi]
     if (typeof winnerName !== 'string') {
-      setWinnerIndex(null)
       return
     }
-    setWinnerIndex(null)
     setWinner(winnerName)
     setNames((prev) => prev.filter((_, idx) => idx !== wi))
 

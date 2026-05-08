@@ -27,11 +27,12 @@ export default function SpinnerWheel({
   onSpinComplete,
   size = 380,
 }: SpinnerWheelProps) {
+  const HUB_RADIUS_RATIO = 0.105
   const SIZE = size
   const CX = SIZE / 2
   const CY = SIZE / 2
   const R = SIZE / 2 - 10
-  const INNER_R = Math.max(32, Math.round(SIZE * 0.105))
+  const INNER_R = Math.max(32, Math.round(SIZE * HUB_RADIUS_RATIO))
   const controls = useAnimation()
   const prevRotation = useRef(0)
   const tickIntervalRef = useRef<NodeJS.Timeout | null>(null)
