@@ -3,7 +3,7 @@ declare module 'canvas-confetti' {
     [key: string]: unknown
   }
 
-  type Confetti = (options?: ConfettiOptions) => Promise<null> | null
+  type Confetti = (options?: ConfettiOptions) => Promise<void> | void
 
   const confetti: Confetti
 
