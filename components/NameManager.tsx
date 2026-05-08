@@ -35,8 +35,8 @@ export default function NameManager({ names, onNamesChange, disabled }: NameMana
       toast.error('Name already exists!')
       return
     }
-    if (names.length >= 20) {
-      toast.error('Maximum 20 names allowed!')
+    if (names.length >= 30) {
+      toast.error('Maximum 30 names allowed!')
       return
     }
     onNamesChange([...names, trimmed])
@@ -150,11 +150,11 @@ export default function NameManager({ names, onNamesChange, disabled }: NameMana
               color: '#00d4ff',
             }}
           >
-            {names.length} / 20
+            {names.length} / 30
           </span>
-          {names.length < 2 && (
+          {names.length === 0 && (
             <span className="font-body text-xs" style={{ color: 'rgba(255,170,0,0.8)' }}>
-              Add {2 - names.length} more to spin
+              Add 1 name to spin
             </span>
           )}
         </div>

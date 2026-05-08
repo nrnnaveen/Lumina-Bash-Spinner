@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef } from 'react'
 import { motion, useAnimation } from 'framer-motion'
 import {
   buildSegments,
@@ -16,13 +16,8 @@ interface SpinnerWheelProps {
   rotation: number
   winnerIndex: number | null
   onSpinComplete: () => void
+  size?: number
 }
-
-const SIZE = 380
-const CX = SIZE / 2
-const CY = SIZE / 2
-const R = SIZE / 2 - 10
-const INNER_R = 40
 
 export default function SpinnerWheel({
   names,
@@ -30,11 +25,16 @@ export default function SpinnerWheel({
   rotation,
   winnerIndex,
   onSpinComplete,
+  size = 380,
 }: SpinnerWheelProps) {
+  const SIZE = size
+  const CX = SIZE / 2
+  const CY = SIZE / 2
+  const R = SIZE / 2 - 10
+  const INNER_R = Math.max(32, Math.round(SIZE * 0.105))
   const controls = useAnimation()
   const prevRotation = useRef(0)
   const tickIntervalRef = useRef<NodeJS.Timeout | null>(null)
-  const [displayRotation, setDisplayRotation] = useState(0)
 
   const segments = buildSegments(names)
 
@@ -87,10 +87,8 @@ export default function SpinnerWheel({
   if (names.length === 0) {
     return (
       <div
-        className="flex items-center justify-center rounded-full"
+        className="mx-auto flex items-center justify-center rounded-full w-full max-w-[420px] aspect-square"
         style={{
-          width: SIZE,
-          height: SIZE,
           background: 'rgba(6,13,22,0.8)',
           border: '2px solid rgba(0,212,255,0.2)',
         }}
@@ -103,13 +101,13 @@ export default function SpinnerWheel({
   }
 
   return (
-    <div className="relative flex items-center justify-center" style={{ width: SIZE + 60, height: SIZE + 60 }}>
+    <div className="relative mx-auto flex w-full max-w-[440px] aspect-square items-center justify-center">
       {/* Outer glow rings */}
       <div
         className="absolute rounded-full"
         style={{
-          width: SIZE + 40,
-          height: SIZE + 40,
+          width: '95%',
+          height: '95%',
           border: '1px solid rgba(0,212,255,0.15)',
           boxShadow: isSpinning
             ? '0 0 40px rgba(0,212,255,0.4), 0 0 80px rgba(180,79,255,0.2)'
@@ -120,8 +118,8 @@ export default function SpinnerWheel({
       <div
         className="absolute rounded-full"
         style={{
-          width: SIZE + 20,
-          height: SIZE + 20,
+          width: '90%',
+          height: '90%',
           border: '1px solid rgba(180,79,255,0.15)',
         }}
       />
@@ -138,8 +136,8 @@ export default function SpinnerWheel({
       <motion.div
         animate={controls}
         style={{
-          width: SIZE,
-          height: SIZE,
+          width: '86.5%',
+          height: '86.5%',
           transformOrigin: 'center center',
         }}
       >

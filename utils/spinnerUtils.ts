@@ -36,11 +36,11 @@ export function buildSegments(names: string[]): SpinnerSegment[] {
 }
 
 export function getRandomSpin(names: string[]): { totalRotation: number; winnerIndex: number } {
-  const winnerIndex = Math.floor(Math.random() * names.length)
+  const winnerIndex = getRandomInt(names.length)
   const segmentAngle = 360 / names.length
 
   // Extra full rotations for drama (5–10)
-  const extraSpins = (Math.floor(Math.random() * 6) + 5) * 360
+  const extraSpins = (getRandomInt(6) + 5) * 360
 
   // The pointer is at top (270° offset in SVG polar coords)
   // We want winnerIndex segment center to land at top
@@ -50,6 +50,26 @@ export function getRandomSpin(names: string[]): { totalRotation: number; winnerI
   const totalRotation = extraSpins + normalizedTarget
 
   return { totalRotation, winnerIndex }
+}
+
+function getRandomInt(max: number): number {
+  if (max <= 0) return 0
+
+  if (typeof crypto !== 'undefined' && typeof crypto.getRandomValues === 'function') {
+    const range = 0x100000000
+    const limit = Math.floor(range / max) * max
+    const array = new Uint32Array(1)
+    let value = 0
+
+    do {
+      crypto.getRandomValues(array)
+      value = array[0]
+    } while (value >= limit)
+
+    return value % max
+  }
+
+  return Math.floor(Math.random() * max)
 }
 
 export function truncateName(name: string, maxLen: number = 12): string {
