@@ -2,6 +2,8 @@
 
 A futuristic, neon-styled spinning wheel app for **Lumina Bash** weekly tech sessions — pick speakers, assign tasks, and add a fun twist to your standups.
 
+***Link 🔗: - https://lumina-bash-spinner.vercel.app/*** 
+
 ![Lumina Spinner](https://img.shields.io/badge/Next.js-14-black?logo=next.js) ![TypeScript](https://img.shields.io/badge/TypeScript-5-blue?logo=typescript) ![Tailwind CSS](https://img.shields.io/badge/Tailwind-3-38bdf8?logo=tailwindcss) ![Framer Motion](https://img.shields.io/badge/Framer_Motion-11-ff0055)
 
 ---
