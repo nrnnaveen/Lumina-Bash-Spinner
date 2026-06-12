@@ -79,43 +79,6 @@ npm run build
 
 # Start production server
 npm start
-```
-
----
-
-## ☁️ Deploy on Vercel
-
-### Option 1: Vercel CLI
-
-```bash
-# Install Vercel CLI
-npm i -g vercel
-
-# Deploy
-vercel
-
-# Follow the prompts:
-# - Set up and deploy? Yes
-# - Which scope? (your account)
-# - Link to existing project? No
-# - Project name: lumina-spinner
-# - Directory: ./
-# - Override settings? No
-```
-
-### Option 2: Vercel Dashboard
-
-1. Push project to GitHub
-2. Go to [vercel.com](https://vercel.com) → New Project
-3. Import your repository
-4. Framework: **Next.js** (auto-detected)
-5. No environment variables needed
-6. Click **Deploy**
-
-### Environment Variables
-None required — this app runs entirely client-side.
-
----
 
 ## 🎮 How to Use
 
