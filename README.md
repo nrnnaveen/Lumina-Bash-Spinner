@@ -118,10 +118,4 @@ npm start
 
 ---
 
-## 📝 License
-
-MIT — free to use and modify for your team sessions!
-
----
-
 *Built with ⚡ for Lumina Bash weekly tech sessions*
