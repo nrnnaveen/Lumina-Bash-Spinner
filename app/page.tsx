@@ -250,7 +250,7 @@ export default function HomePage() {
                   </span>
                 ) : (
                   <span className="flex items-center justify-center gap-2">
-                    ⚡ SPIN THE WHEEL
+                    ⚡ SPIN
                   </span>
                 )}
               </motion.button>
@@ -363,7 +363,7 @@ function SessionInfo({ names, winner }: { names: string[]; winner: string | null
         </p>
         {[
           '1. Add team member names',
-          '2. Click ⚡ SPIN THE WHEEL',
+          '2. Click ⚡ SPIN ',
           '3. Wait for the result',
           '4. Winner presents first!',
         ].map((step) => (
